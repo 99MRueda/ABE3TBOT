@@ -12,8 +12,8 @@ def send_message():
     user_message = request.form['user_message']
 
     # Llama a la función get_answer para obtener la respuesta del chatbot
-    #bot_response = get_answer(user_message)
-    bot_response = "Esto es una prueba"
+    bot_response = get_answer(user_message)
+    #bot_response = "Esto es una prueba"
     return jsonify({'bot_response': bot_response})
 
 if __name__ == '__main__':

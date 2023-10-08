@@ -1,6 +1,6 @@
 <!-- templates/chat.html -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,15 +9,23 @@
 </head>
 <body>
     <div class="chat-container">
-        <div class="chat-header">
-            <h2>ABE3TBOT</h2>
+        <header>
+        <div class="logoe3t">
+            <img class="img-logo1" src="{{ url_for('static', filename='logos/e3tlogo.png') }}">
         </div>
+        <div class="chat-header">
+            <h1>ABE3TBOT</h1>
+        </div>
+        <div class="logouis">
+            <img class="img-logo2" src="{{ url_for('static', filename='logos/uislogo.png') }}">
+        </div>
+        </header>
         <div id="welcome-message" class="bot-message">¡Hola! Soy un un chatbot diseñado para responder preguntas acerca del proceso de acreditación ABET en la E3T. ¿En qué puedo ayudarte hoy?</div>
         <div class="chat-content" id="chat-content">
             <!-- Aquí se mostrarán los mensajes del chat -->
         </div>
         <div class="chat-input">
-            <input type="text" id="user-input" placeholder="Escribe un mensaje...">
+            <input type="text" id="user-input" class="typing" placeholder="Escribe un mensaje...">
             <button onclick="sendMessage()">Enviar</button>
         </div>
     </div>

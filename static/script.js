@@ -1,14 +1,37 @@
+// Función para deshabilitar el campo de entrada de texto y el botón de envío
+function disableInput() {
+    const userInput = document.getElementById("user-input");
+    const sendButton = document.querySelector("button"); // Asume que tienes un botón de envío
+    userInput.disabled = true;
+    sendButton.disabled = true;
+}
+
+// Función para habilitar el campo de entrada de texto y el botón de envío
+function enableInput() {
+    const userInput = document.getElementById("user-input");
+    const sendButton = document.querySelector("button"); // Asume que tienes un botón de envío
+    userInput.disabled = false;
+    sendButton.disabled = false;
+}
+
 // Función para enviar mensajes
 function sendMessage() {
     const userInput = document.getElementById("user-input");
-    const message = userInput.value;
+    const message = userInput.value.trim();
     const chatContent = document.getElementById("chat-content");
+
+    if (message === "") {
+        return; // No se envía un mensaje en blanco
+    }
 
     // Agregar el mensaje del usuario al historial de chat
     chatContent.innerHTML += `<div class="user-message">${message}</div>`;
 
     // Borrar el campo de entrada
     userInput.value = "";
+
+    // Deshabilitar el campo de entrada y el botón de envío mientras el bot responde
+    disableInput();
 
     // Simular que el chatbot está escribiendo
     chatContent.innerHTML += '<div class="bot-message typing">El chatbot está escribiendo...</div>';
@@ -28,12 +51,14 @@ function sendMessage() {
             // Agregar la respuesta del chatbot al historial de chat
             chatContent.innerHTML += `<div class="bot-message">${response.bot_response}</div>`;
 
+            // Habilitar nuevamente el campo de entrada y el botón de envío
+            enableInput();
+
             // Desplazarse hacia abajo para mostrar el mensaje más reciente
             chatContent.scrollTop = chatContent.scrollHeight;
         }
     });
 }
-
 
 // Agregar un evento para detectar la tecla "Enter" en el campo de entrada
 document.getElementById("user-input").addEventListener("keydown", function(event) {

@@ -1,13 +1,15 @@
 import os
-os.environ["OPENAI_API_KEY"] = "################"
+os.environ["OPENAI_API_KEY"] = "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"
 from langchain.chains.question_answering import load_qa_chain
 from langchain.chat_models import ChatOpenAI
 import pinecone
 from langchain.vectorstores import Pinecone
 from langchain.embeddings.openai import OpenAIEmbeddings
+from langchain.chains import RetrievalQA
+from langchain.prompts import PromptTemplate
 
 pinecone.init(
-    api_key="###############",
+    api_key="bfdb1899-cf76-47ad-b41c-89a3c7a02a6c",
     environment="gcp-starter"
 )
 
@@ -15,23 +17,19 @@ index_name = "langchain-demo"
 embeddings= OpenAIEmbeddings(model="text-embedding-ada-002")
 index=Pinecone.from_existing_index(index_name, embeddings)
 
-def get_similiar_docs(query, k=2, score=False):
-  if score:
-    similar_docs = index.similarity_search_with_score(query, k=k)
-  else:
-    similar_docs = index.similarity_search(query, k=k)
-  return similar_docs
-
-# model_name = "text-davinci-003"
-model_name = "gpt-3.5-turbo"
-# model_name = "gpt-4"
-llm = ChatOpenAI(model_name=model_name)
-
-chain = load_qa_chain(llm, chain_type="stuff")
-
 def get_answer(query):
-  similar_docs = get_similiar_docs(query)
-  answer = chain.run(input_documents=similar_docs, question=query)
-  return answer
+  question = query
+  template = """Utiliza los siguientes fragmentos de contexto para responder la pregunta al final. Si la pregunta no es acerca de ABET, simplemente di que Solo puedo responder preguntas sobre ABET en la E3T. Si trata de ABET pero no esta en la información suministrada di que No tengo la información que me pides en este momento, no intentes inventar una respuesta.
+  {context}
+  Question: {question}
+  Helpful Answer:"""
+  QA_CHAIN_PROMPT = PromptTemplate.from_template(template)
 
-#print(get_answer("Hola"))
+  llm = ChatOpenAI(model_name="gpt-3.5-turbo", temperature=0)
+  qa_chain = RetrievalQA.from_chain_type(
+    llm,
+    retriever=index.as_retriever(),
+    chain_type_kwargs={"prompt": QA_CHAIN_PROMPT}
+  )
+  result = qa_chain({"query": question})
+  return result["result"]
