@@ -1,5 +1,5 @@
 import os
-os.environ["OPENAI_API_KEY"] = "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"
+os.environ["OPENAI_API_KEY"] = "***********"
 from langchain.chains.question_answering import load_qa_chain
 from langchain.chat_models import ChatOpenAI
 import pinecone
@@ -9,7 +9,7 @@ from langchain.chains import RetrievalQA
 from langchain.prompts import PromptTemplate
 
 pinecone.init(
-    api_key="bfdb1899-cf76-47ad-b41c-89a3c7a02a6c",
+    api_key="*********",
     environment="gcp-starter"
 )
 
