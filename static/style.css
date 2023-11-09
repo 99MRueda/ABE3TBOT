@@ -49,7 +49,7 @@ header {
 
 .chat-content {
     padding: 15px;
-    margin-bottom: 70px; /* Ajusta este valor según sea necesario */
+    margin-bottom: 150px; /* Ajusta este valor según sea necesario */
     max-height: calc(100vh - 80px); /* Ajusta este valor según sea necesario */
     overflow-y: auto;
 }

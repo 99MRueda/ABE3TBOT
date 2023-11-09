@@ -24,11 +24,14 @@
         <div class="chat-content" id="chat-content">
             <!-- Aquí se mostrarán los mensajes del chat -->
         </div>
-        <div class="chat-input">
-            <input type="text" id="user-input" class="typing" placeholder="Escribe un mensaje...">
-            <button onclick="sendMessage()">Enviar</button>
-        </div>
-    </div>
+        <footer>
+            <div class="chat-input">
+                <input type="text" id="user-input" class="typing" placeholder="Escribe un mensaje...">
+                <button onclick="sendMessage()">Enviar</button>
+            </div>
+        </footer>
+    </div>   
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Preguntas no contestadas</title>
+</head>
+<body>
+    <h1>Preguntas no contestadas</h1>
+    <table>
+        <tr>
+            <th>Pregunta</th>
+        </tr>
+        {% for conversation in unanswered %}
+            <tr>
+                <td>{{ conversation.user }}</td>
+                <td>{{ conversation.user_message }}</td>
+                <td>
+                    <form action="/delete_question" method="POST">
+                        <input type="hidden" name="question" value="{{ conversation.user_message }}">
+                        <button type="submit">Eliminar</button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

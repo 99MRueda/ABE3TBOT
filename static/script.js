@@ -35,7 +35,7 @@ function sendMessage() {
 
     // Simular que el chatbot está escribiendo
     chatContent.innerHTML += '<div class="bot-message typing">El chatbot está escribiendo...</div>';
-
+    chatContent.scrollTop = chatContent.scrollHeight;
     // Realizar una solicitud AJAX al servidor Flask
     $.ajax({
         type: "POST",

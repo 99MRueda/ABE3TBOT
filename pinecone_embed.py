@@ -1,5 +1,5 @@
 import os
-os.environ["OPENAI_API_KEY"] = "***********"
+os.environ["OPENAI_API_KEY"] = "*******************"
 from langchain.chains.question_answering import load_qa_chain
 from langchain.chat_models import ChatOpenAI
 import pinecone
@@ -9,7 +9,7 @@ from langchain.chains import RetrievalQA
 from langchain.prompts import PromptTemplate
 
 pinecone.init(
-    api_key="*********",
+    api_key="**************",
     environment="gcp-starter"
 )
 
@@ -25,7 +25,7 @@ def get_answer(query):
   Helpful Answer:"""
   QA_CHAIN_PROMPT = PromptTemplate.from_template(template)
 
-  llm = ChatOpenAI(model_name="gpt-3.5-turbo", temperature=0)
+  llm = ChatOpenAI(model_name="gpt-3.5-turbo", temperature=0.2)
   qa_chain = RetrievalQA.from_chain_type(
     llm,
     retriever=index.as_retriever(),
