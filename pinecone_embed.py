@@ -7,10 +7,18 @@ from langchain.vectorstores import Pinecone
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.chains import RetrievalQA
 from langchain.prompts import PromptTemplate
+from pinecone.core.client.configuration import Configuration as OpenApiConfiguration
+
+openapi_config = OpenApiConfiguration.get_default_copy()
+# Here I am trying to connect to an insecure local proxy at 0.0.0.0:8081,
+#however you can keep the verify_ssl=True if you are using a secure connection
+openapi_config.verify_ssl = False
+openapi_config.proxy = "http://proxy.server:3128"
 
 pinecone.init(
-    api_key="**************",
-    environment="gcp-starter"
+    api_key="*************************",
+    environment="gcp-starter",
+    openapi_config=openapi_config
 )
 
 index_name = "langchain-demo"
@@ -25,7 +33,7 @@ def get_answer(query):
   Helpful Answer:"""
   QA_CHAIN_PROMPT = PromptTemplate.from_template(template)
 
-  llm = ChatOpenAI(model_name="gpt-3.5-turbo", temperature=0.2)
+  llm = ChatOpenAI(model_name="gpt-4-1106-preview", temperature=0.1)
   qa_chain = RetrievalQA.from_chain_type(
     llm,
     retriever=index.as_retriever(),

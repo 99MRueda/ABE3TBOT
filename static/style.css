@@ -26,9 +26,9 @@ header {
 }
 
 .chat-header h1 {
-    margin: 0; 
-    font-size: 40px; 
-    
+    margin: 0;
+    font-size: 40px;
+
 }
 
 .chat-container {
@@ -49,7 +49,7 @@ header {
 
 .chat-content {
     padding: 15px;
-    margin-bottom: 150px; /* Ajusta este valor según sea necesario */
+    margin-bottom: 50px; /* Ajusta este valor según sea necesario */
     max-height: calc(100vh - 80px); /* Ajusta este valor según sea necesario */
     overflow-y: auto;
 }
@@ -77,9 +77,9 @@ header {
 .chat-input {
     position: fixed;
     bottom: 0;
-    width: 97%;
+    width: 5px;
     background-color: #151715;
-    padding: 40px;
+    padding: 5px;
     border-top: 1px solid #ddd;
     display: flex;
 }
@@ -87,7 +87,7 @@ header {
 .chat-input input[type="text"] {
     font-size: 20px;
     flex-grow: 1;
-    padding: 10px;
+    padding: 75%;
     border: none;
     border-radius: 5px;
     background-color:#262927;
@@ -96,11 +96,12 @@ header {
 
 .chat-input button {
     background-color: #2b9e36;
+    width: 50px;
     color: white;
     border: none;
-    padding: 20px;
-    margin-left: 10px;
-    border-radius: 5px;
+    padding: 1px;
+    margin-left: 1px;
+    border-radius: 1px;
     cursor: pointer;
     transition: background-color 0.3s;
 }
